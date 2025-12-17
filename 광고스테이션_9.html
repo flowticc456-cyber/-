@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>광고스테이션 - 네이버 카페 마케팅 전문</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #03C75A;
+            --dark-green: #02a54c;
+            --light-green: #e8f9ef;
+            --accent-green: #00d65c;
+            --white: #ffffff;
+            --off-white: #f8faf9;
+            --dark: #1a1a1a;
+            --gray-dark: #2d2d2d;
+            --gray: #666666;
+            --gray-light: #999999;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: var(--white);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-green);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-green));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-green);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-green);
+        }
+
+        .cta-button {
+            background: var(--primary-green);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(3, 199, 90, 0.3);
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background: var(--dark-green);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(3, 199, 90, 0.4);
+        }
+
+        /* Page Container */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, var(--primary-green) 0%, #02a54c 50%, #018a40 100%);
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 800' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,400 Q300,300 600,400 T1200,400 L1200,800 L0,800 Z' fill='rgba(255,255,255,0.05)'/%3E%3Cpath d='M0,500 Q300,400 600,500 T1200,500 L1200,800 L0,800 Z' fill='rgba(255,255,255,0.03)'/%3E%3C/svg%3E") no-repeat center bottom;
+            background-size: cover;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            z-index: 1;
+            padding: 0 5%;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero h2 {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            opacity: 0.95;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.8;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: white;
+            color: var(--primary-green);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            width: 100px;
+            height: 100px;
+            background: white;
+            border-radius: 50%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 60%;
+            right: 10%;
+            width: 150px;
+            height: 150px;
+            background: white;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 5%;
+            background: var(--dark);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-subtitle {
+            color: var(--primary-green);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            font-weight: 700;
+            color: white;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: var(--gray-dark);
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .service-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.8rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-desc {
+            font-size: 0.95rem;
+            color: var(--gray-light);
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+            transition: color 0.4s ease;
+        }
+
+        .service-card:hover .service-desc {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .service-arrow {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-green);
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.4s ease;
+            z-index: 1;
+            font-weight: 700;
+        }
+
+        .service-card:hover .service-arrow {
+            opacity: 1;
+            transform: translateX(0);
+            background: white;
+            color: var(--primary-green);
+        }
+
+        /* Process Section */
+        .process {
+            padding: 6rem 5%;
+            background: linear-gradient(180deg, var(--dark) 0%, #252525 100%);
+        }
+
+        .process .section-subtitle {
+            color: var(--gray-light);
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .process-card {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .process-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-green);
+            font-size: 2rem;
+        }
+
+        .process-icon svg {
+            width: 50px;
+            height: 50px;
+            stroke: var(--primary-green);
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .process-number {
+            font-size: 0.9rem;
+            color: var(--primary-green);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .process-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .process-desc {
+            font-size: 0.9rem;
+            color: var(--gray-light);
+            line-height: 1.7;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 6rem 5%;
+            background: var(--off-white);
+        }
+
+        .faq .section-title {
+            color: var(--dark);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .faq-question {
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--dark);
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            color: var(--primary-green);
+        }
+
+        .faq-question span {
+            color: var(--primary-green);
+            font-weight: 700;
+            margin-right: 1rem;
+        }
+
+        .faq-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--light-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-green);
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-answer-content {
+            padding: 0 2rem 1.5rem;
+            color: var(--gray);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 5%;
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 50%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            color: white;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .cta-section p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-section .hero-cta {
+            background: white;
+            color: var(--primary-green);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            padding: 4rem 5% 2rem;
+            color: white;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-brand .logo {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand .logo-icon {
+            background: var(--primary-green);
+        }
+
+        .footer-brand p {
+            color: var(--gray-light);
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .footer-links h4 {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--gray-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-green);
+        }
+
+        .footer-contact p {
+            color: var(--gray-light);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-contact strong {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            text-align: center;
+            color: var(--gray-light);
+            font-size: 0.85rem;
+        }
+
+        /* Detail Page Styles */
+        .detail-hero {
+            padding: 160px 5% 80px;
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .detail-hero h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .detail-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .detail-content {
+            padding: 5rem 5%;
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--dark);
+        }
+
+        .detail-section {
+            margin-bottom: 3rem;
+        }
+
+        .detail-section h2 {
+            font-size: 1.8rem;
+            color: var(--primary-green);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--gray-dark);
+        }
+
+        .detail-section p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: var(--gray-light);
+            margin-bottom: 1rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .feature-list li {
+            padding: 1rem 1.5rem;
+            background: var(--gray-dark);
+            border-radius: 10px;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+            color: white;
+            position: relative;
+            padding-left: 3rem;
+            border-left: 3px solid var(--primary-green);
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 1.2rem;
+            color: var(--primary-green);
+            font-weight: 700;
+        }
+
+        .detail-cta {
+            background: var(--gray-dark);
+            padding: 4rem 5%;
+            text-align: center;
+        }
+
+        .detail-cta h3 {
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .detail-cta p {
+            color: var(--gray-light);
+            margin-bottom: 2rem;
+        }
+
+        .detail-cta .cta-button {
+            padding: 1rem 3rem;
+            font-size: 1.1rem;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gray-light);
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .back-button:hover {
+            color: var(--primary-green);
+        }
+
+        .detail-footer {
+            background: var(--gray-dark);
+            padding: 2rem 5%;
+            text-align: center;
+            color: var(--gray-light);
+            font-size: 0.9rem;
+        }
+
+        /* Detail page wrapper for full dark background */
+        .page:not(#page-main) {
+            background: var(--dark);
+        }
+
+        /* Portfolio Links */
+        .portfolio-links {
+            margin-top: 1.5rem;
+        }
+
+        .portfolio-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem 1.5rem;
+            background: var(--gray-dark);
+            border-radius: 12px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            margin-bottom: 0.8rem;
+        }
+
+        .portfolio-link:hover {
+            background: var(--primary-green);
+            border-color: var(--primary-green);
+            transform: translateX(5px);
+        }
+
+        .portfolio-icon {
+            font-size: 1.5rem;
+        }
+
+        .portfolio-text {
+            flex: 1;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .portfolio-arrow {
+            font-size: 1.2rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .portfolio-link:hover .portfolio-arrow {
+            opacity: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .process-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll Animation */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo" onclick="showPage('main')">
+            <div class="logo-icon">📢</div>
+            광고스테이션
+        </div>
+        <ul class="nav-menu">
+            <li><a onclick="showPage('main'); setTimeout(() => scrollToSection('services'), 100)">사업 분야</a></li>
+            <li><a onclick="showPage('main'); setTimeout(() => scrollToSection('process'), 100)">상품 소개</a></li>
+            <li><a onclick="showPage('main'); setTimeout(() => scrollToSection('faq'), 100)">고객센터</a></li>
+        </ul>
+        <a href="https://open.kakao.com/o/sNLp4CBd" target="_blank" class="cta-button">3초만에 문의하기</a>
+    </nav>
+
+    <!-- Main Page -->
+    <div id="page-main" class="page active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="hero-content">
+                <div class="hero-badge">네이버 카페 마케팅 전문</div>
+                <h1>네이버 카페 마케팅의 모든 것</h1>
+                <h2>10년 노하우로 검증된 카페 최적화 전문 파트너</h2>
+                <p>"광고스테이션"은 2013년부터 축적된 카페 운영 노하우와<br>검색 알고리즘 분석을 통해 확실한 성과를 약속합니다</p>
+                <a href="https://open.kakao.com/o/sNLp4CBd" target="_blank" class="hero-cta">
+                    지금 1:1 문의하기
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="services" id="services">
+            <div class="section-header animate-on-scroll">
+                <div class="section-subtitle">지금, 당신에게 필요한 마케팅은 무엇인가요?</div>
+                <h2 class="section-title">매출 향상을 위한 맞춤형 마케팅 상품</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card animate-on-scroll" onclick="showPage('optimized-cafe')">
+                    <div class="service-icon">
+                        <img src="https://prime.me.kr/wp-content/uploads/2025/11/카페.png" alt="네이버 카페">
+                    </div>
+                    <h3 class="service-title">최적화 카페</h3>
+                    <p class="service-desc">2013년도 이전에 생성한 노출형 최적화 카페입니다. 검색 상위 노출에 최적화되어 있습니다.</p>
+                    <div class="service-arrow">→</div>
+                </div>
+                <div class="service-card animate-on-scroll" onclick="showPage('cafe-id')">
+                    <div class="service-icon">
+                        <img src="https://prime.me.kr/wp-content/uploads/2025/11/카페.png" alt="네이버 카페">
+                    </div>
+                    <h3 class="service-title">카페 최적화 ID</h3>
+                    <p class="service-desc">네이버 검색 알고리즘에 최적화된 계정으로, 게시글 작성 시 자연스럽게 상위 노출이 가능합니다.</p>
+                    <div class="service-arrow">→</div>
+                </div>
+                <div class="service-card animate-on-scroll" onclick="showPage('cafe-crank')">
+                    <div class="service-icon">
+                        <img src="https://prime.me.kr/wp-content/uploads/2025/11/카페.png" alt="네이버 카페">
+                    </div>
+                    <h3 class="service-title">카페 C랭크 활성화 작업</h3>
+                    <p class="service-desc">카페 C랭크 활성화를 통해 검색 노출 효과를 극대화하고 브랜드 인지도를 높입니다.</p>
+                    <div class="service-arrow">→</div>
+                </div>
+                <div class="service-card animate-on-scroll" onclick="showPage('cafe-members')">
+                    <div class="service-icon">
+                        <img src="https://prime.me.kr/wp-content/uploads/2025/11/카페.png" alt="네이버 카페">
+                    </div>
+                    <h3 class="service-title">카페 회원수 증가</h3>
+                    <p class="service-desc">안정적인 방식으로 회원 수를 확장하여 카페의 활성도와 성장 기반을 효율적으로 강화합니다.</p>
+                    <div class="service-arrow">→</div>
+                </div>
+                <div class="service-card animate-on-scroll" onclick="showPage('cafe-exposure')">
+                    <div class="service-icon">
+                        <img src="https://prime.me.kr/wp-content/uploads/2025/11/카페.png" alt="네이버 카페">
+                    </div>
+                    <h3 class="service-title">카페 상위노출</h3>
+                    <p class="service-desc">지정 키워드 검색 시 네이버 통합검색 1페이지 노출을 목표로 설계된 노출 보장형 서비스입니다.</p>
+                    <div class="service-arrow">→</div>
+                </div>
+                <div class="service-card animate-on-scroll" onclick="showPage('cafe-consulting')">
+                    <div class="service-icon">
+                        <img src="https://prime.me.kr/wp-content/uploads/2025/11/카페.png" alt="네이버 카페">
+                    </div>
+                    <h3 class="service-title">카페 컨설팅</h3>
+                    <p class="service-desc">카페 운영 전반에 대한 전문 컨설팅을 제공하여 체계적인 성장 전략을 수립합니다.</p>
+                    <div class="service-arrow">→</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section class="process" id="process">
+            <div class="section-header animate-on-scroll">
+                <div class="section-subtitle">마케팅이 어떻게 진행되는지 궁금하신가요?</div>
+                <h2 class="section-title">체계적인 마케팅 프로세스를 확인해보세요</h2>
+            </div>
+            <div class="process-grid">
+                <div class="process-card animate-on-scroll">
+                    <div class="process-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M3 3v18h18"/>
+                            <path d="M18 9l-5 5-4-4-3 3"/>
+                        </svg>
+                    </div>
+                    <div class="process-number">01</div>
+                    <h3 class="process-title">상담 및 분석</h3>
+                    <p class="process-desc">전문 컨설턴트가 1:1 상담을 통해 브랜드의 방향성을 함께 설계합니다</p>
+                </div>
+                <div class="process-card animate-on-scroll">
+                    <div class="process-icon">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="3" y="3" width="18" height="18" rx="2"/>
+                            <path d="M12 8v8M8 12h8"/>
+                        </svg>
+                    </div>
+                    <div class="process-number">02</div>
+                    <h3 class="process-title">전략 제안</h3>
+                    <p class="process-desc">귀사의 브랜드(업종에) 맞게 맞춤형 방향성 마케팅 전략을 제안드립니다.</p>
+                </div>
+                <div class="process-card animate-on-scroll">
+                    <div class="process-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
+                        </svg>
+                    </div>
+                    <div class="process-number">03</div>
+                    <h3 class="process-title">실행 및 관리</h3>
+                    <p class="process-desc">맞춤 전략을 실행하고, 데이터를 통해 성과를 정밀하게 관리합니다</p>
+                </div>
+                <div class="process-card animate-on-scroll">
+                    <div class="process-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                    <div class="process-number">04</div>
+                    <h3 class="process-title">결과 분석 및 보고</h3>
+                    <p class="process-desc">지속적인 관리를 진행한 후에 성과를 분석하여 결과 보고서를 제공합니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq" id="faq">
+            <div class="section-header animate-on-scroll">
+                <div class="section-subtitle" style="color: var(--primary-green);">더 궁금한게 있으신가요?</div>
+                <h2 class="section-title">자주 묻는 질문</h2>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item animate-on-scroll">
+                    <div class="faq-question">
+                        <div><span>Q.</span> 광고스테이션은 어떤 마케팅 서비스를 제공하나요?</div>
+                        <div class="faq-icon">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            "광고스테이션"은 네이버 카페 마케팅에 특화된 종합 마케팅 서비스를 제공합니다. 주요 서비스로는 최적화 카페, 카페 최적화 ID, 카페 회원수 증가, 카페 C랭크 활성화 작업, 카페 상위노출, 카페 컨설팅 등이 있습니다. 저희는 데이터 기반의 분석과 창의적인 전략을 결합하여 고객사의 매출 증대와 브랜드 가치를 극대화하는 데 중점을 두고 있습니다.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item animate-on-scroll">
+                    <div class="faq-question">
+                        <div><span>Q.</span> 마케팅 전략은 어떻게 수립되나요?</div>
+                        <div class="faq-icon">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            "광고스테이션"의 마케팅 전략 수립은 철저한 분석과 맞춤형 접근을 바탕으로 이루어집니다. 먼저, 고객사와의 1:1 상담을 통해 비즈니스 목표와 현재 상황을 정확히 파악합니다. 그 다음, 시장 분석과 경쟁사 분석을 통해 데이터 기반의 인사이트를 도출하고, 이를 기반으로 최적화된 카페 마케팅 전략을 제안합니다.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item animate-on-scroll">
+                    <div class="faq-question">
+                        <div><span>Q.</span> 서비스 이용 절차는 어떻게 되나요?</div>
+                        <div class="faq-icon">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            서비스 이용 절차는 다음과 같습니다: 1. 상담 신청: 카카오톡을 통해 무료 상담을 신청합니다. 2. 상담 및 분석: 전문 마케터와의 1:1 상담을 통해 비즈니스 목표와 현재 마케팅 상황을 분석합니다. 3. 전략 제안: 맞춤형 마케팅 전략을 제안드립니다. 4. 계약 및 실행: 제안된 전략에 동의하시면 계약을 체결하고, 마케팅을 실행합니다. 5. 성과 분석: 솔루션 진행 후, 성과를 분석하고 보고서를 제공합니다.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item animate-on-scroll">
+                    <div class="faq-question">
+                        <div><span>Q.</span> 결제 방식은 어떻게 되나요?</div>
+                        <div class="faq-icon">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            "광고스테이션"은 계좌이체 결제 방식을 지원합니다. 계좌이체 결제로 안전하고 간편한 결제 수단을 통해 서비스를 이용하고, 세금계산서 발행까지 지원하고 있습니다. 또한, 장기 계약이나 대규모 프로젝트의 경우 맞춤형 결제 계획을 제공하여 고객사의 재정적 부담을 최소화할 수 있도록 돕고 있습니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section" id="contact">
+            <div class="cta-content">
+                <h2>비즈니스 성공을 위한 필수 마케팅 솔루션</h2>
+                <p>광고스테이션과 함께 하세요</p>
+                <a href="https://open.kakao.com/o/sNLp4CBd" target="_blank" class="hero-cta">
+                    3초만에 문의하기
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo" onclick="showPage('main')">
+                        <div class="logo-icon">📢</div>
+                        광고스테이션
+                    </div>
+                    <p>검증된 데이터와 경험을 바탕으로<br>브랜드의 성장 과정을 함께 합니다.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>사업 분야</h4>
+                    <ul>
+                        <li><a onclick="showPage('optimized-cafe')">최적화 카페</a></li>
+                        <li><a onclick="showPage('cafe-exposure')">카페 상위노출</a></li>
+                        <li><a onclick="showPage('cafe-consulting')">카페 컨설팅</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>고객센터</h4>
+                    <ul>
+                        <li><a href="https://open.kakao.com/o/sNLp4CBd" target="_blank">문의하기</a></li>
+                        <li><a href="#">개인정보처리방침</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <p><strong>T.</strong> 010-0000-0000</p>
+                    <p><strong>Address.</strong> 서울특별시 OO구 OO로 OO</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 광고스테이션. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Detail Page: 최적화 카페 -->
+    <div id="page-optimized-cafe" class="page">
+        <section class="detail-hero">
+            <h1>최적화 카페</h1>
+            <p>2013년도 이전에 생성한 노출형 최적화 카페로 검색 상위 노출에 최적화되어 있습니다</p>
+        </section>
+        <section class="detail-content">
+            <div class="back-button" onclick="showPage('main')">← 목록으로 돌아가기</div>
+            <div class="detail-section">
+                <h2>서비스 소개</h2>
+                <p>최적화 카페는 2013년 이전에 생성되어 네이버 검색 알고리즘에서 높은 신뢰도를 인정받는 카페입니다. 오랜 기간 축적된 활동 이력과 안정적인 운영 기록을 바탕으로 검색 결과에서 우선적으로 노출됩니다.</p>
+                <p>광고스테이션은 이러한 프리미엄 최적화 카페를 보유하고 있으며, 고객사의 비즈니스 목표에 맞게 맞춤형 마케팅을 진행합니다.</p>
+            </div>
+            <div class="detail-section">
+                <h2>주요 특징</h2>
+                <ul class="feature-list">
+                    <li>2013년 이전 생성된 고신뢰도 카페</li>
+                    <li>네이버 검색 알고리즘 최적화</li>
+                    <li>자연스러운 상위 노출 효과</li>
+                    <li>다양한 업종 맞춤형 운영 가능</li>
+                    <li>안정적인 장기 노출 보장</li>
+                </ul>
+            </div>
+            <div class="detail-section">
+                <h2>이런 분께 추천합니다</h2>
+                <p>• 네이버 검색에서 브랜드 노출을 원하시는 분</p>
+                <p>• 신규 카페 생성 후 노출이 어려우신 분</p>
+                <p>• 빠르고 안정적인 마케팅 효과를 원하시는 분</p>
+                <p>• 장기적인 온라인 마케팅 채널을 구축하고 싶으신 분</p>
+            </div>
+        </section>
+        <section class="detail-cta">
+            <h3>최적화 카페로 마케팅을 시작하세요</h3>
+            <p>전문 컨설턴트가 맞춤형 솔루션을 제안해드립니다</p>
+            <a href="https://open.kakao.com/o/sNLp4CBd" target="_blank" class="cta-button">무료 상담 신청하기</a>
+        </section>
+        <footer class="detail-footer">
+            <p>© 2024 광고스테이션. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Detail Page: 카페 최적화 ID -->
+    <div id="page-cafe-id" class="page">
+        <section class="detail-hero">
+            <h1>카페 최적화 ID</h1>
+            <p>네이버 검색 알고리즘에 최적화된 계정으로 자연스러운 상위 노출이 가능합니다</p>
+        </section>
+        <section class="detail-content">
+            <div class="back-button" onclick="showPage('main')">← 목록으로 돌아가기</div>
+            <div class="detail-section">
+                <h2>서비스 소개</h2>
+                <p>카페 최적화 ID는 네이버 검색 알고리즘에서 높은 신뢰도를 인정받는 계정입니다. 오랜 기간 정상적인 활동을 통해 쌓인 이력으로 게시글 작성 시 자연스럽게 상위에 노출됩니다.</p>
+                <p>일반 신규 ID로는 얻기 어려운 노출 효과를 최적화 ID를 통해 즉시 경험하실 수 있습니다.</p>
+            </div>
+            <div class="detail-section">
+                <h2>주요 특징</h2>
+                <ul class="feature-list">
+                    <li>검색 알고리즘 최적화 완료된 계정</li>
+                    <li>게시글 작성 즉시 노출 효과</li>
+                    <li>페널티 없는 안전한 계정</li>
+                    <li>다양한 카페 활동 이력 보유</li>
+                    <li>장기간 안정적 사용 가능</li>
+                </ul>
+            </div>
+            <div class="detail-section">
+                <h2>이런 분께 추천합니다</h2>
+                <p>• 카페 마케팅을 처음 시작하시는 분</p>
+                <p>• 신규 ID로 노출이 안 되어 고민이신 분</p>
+                <p>• 여러 카페에서 동시에 마케팅을 진행하고 싶으신 분</p>
+                <p>• 안정적인 계정으로 장기 운영을 원하시는 분</p>
+            </div>
+        </section>
+        <section class="detail-cta">
+            <h3>최적화 ID로 효과적인 마케팅을 시작하세요</h3>
+            <p>전문 컨설턴트가 맞춤형 솔루션을 제안해드립니다</p>
+            <a href="https://open.kakao.com/o/sNLp4CBd" target="_blank" class="cta-button">무료 상담 신청하기</a>
+        </section>
+        <footer class="detail-footer">
+            <p>© 2024 광고스테이션. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Detail Page: 카페 회원수 증가 -->
+    <div id="page-cafe-members" class="page">
+        <section class="detail-hero">
+            <h1>카페 회원수 증가</h1>
+            <p>안정적인 방식으로 회원 수를 확장하여 카페의 활성도와 성장 기반을 강화합니다</p>
+        </section>
+        <section class="detail-content">
+            <div class="back-button" onclick="showPage('main')">← 목록으로 돌아가기</div>
+            <div class="detail-section">
+                <h2>서비스 소개</h2>
+                <p>카페 회원수 증가 서비스는 안전하고 안정적인 방법으로 카페 회원을 확보해드립니다. 급격한 회원 증가로 인한 페널티 없이 자연스러운 성장을 도와드립니다.</p>
+                <p>회원수는 카페의 신뢰도와 활성도를 나타내는 중요한 지표입니다. 충분한 회원수를 확보하여 잠재 고객에게 신뢰를 줄 수 있습니다.</p>
+            </div>
+            <div class="detail-section">
+                <h2>주요 특징</h2>
+                <ul class="feature-list">
+                    <li>안전한 방식의 회원 증가</li>
+                    <li>페널티 없는 자연스러운 성장</li>
+                    <li>원하는 속도로 조절 가능</li>
+                    <li>실제 활동 가능한 회원 확보</li>
+                    <li>카페 등급 상승에 기여</li>
+                </ul>
+            </div>
+            <div class="detail-section">
+                <h2>이런 분께 추천합니다</h2>
+                <p>• 신규 카페를 오픈하여 초기 회원 확보가 필요하신 분</p>
+                <p>• 카페 신뢰도를 높이고 싶으신 분</p>
+                <p>• 카페 등급 상승을 목표로 하시는 분</p>
+                <p>• 활성화된 카페 분위기를 만들고 싶으신 분</p>
+            </div>
+        </section>
+        <section class="detail-cta">
+            <h3>회원수 증가로 카페를 성장시키세요</h3>
+            <p>전문 컨설턴트가 맞춤형 솔루션을 제안해드립니다</p>
+            <a href="https://open.kakao.com/o/sNLp4CBd" target="_blank" class="cta-button">무료 상담 신청하기</a>
+        </section>
+        <footer class="detail-footer">
+            <p>© 2024 광고스테이션. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Detail Page: 카페 C랭크 활성화 작업 -->
+    <div id="page-cafe-crank" class="page">
+        <section class="detail-hero">
+            <h1>카페 C랭크 활성화 작업</h1>
+            <p>C랭크 활성화를 통해 검색 노출 효과를 극대화하고 브랜드 인지도를 높입니다</p>
+        </section>
+        <section class="detail-content">
+            <div class="back-button" onclick="showPage('main')">← 목록으로 돌아가기</div>
+            <div class="detail-section">
+                <h2>서비스 소개</h2>
+                <p>C랭크(C-Rank)는 네이버가 콘텐츠의 품질과 신뢰도를 평가하는 알고리즘입니다. C랭크가 활성화된 카페는 검색 결과에서 더 높은 우선순위를 받게 됩니다.</p>
+                <p>광고스테이션의 C랭크 활성화 작업은 카페의 콘텐츠 품질, 회원 활동, 운영 이력 등을 종합적으로 개선하여 C랭크 점수를 높여드립니다.</p>
+            </div>
+            <div class="detail-section">
+                <h2>주요 특징</h2>
+                <ul class="feature-list">
+                    <li>네이버 C랭크 알고리즘 분석 및 최적화</li>
+                    <li>카페 콘텐츠 품질 향상 작업</li>
+                    <li>회원 활동 활성화 지원</li>
+                    <li>검색 노출 효과 극대화</li>
+                    <li>지속적인 모니터링 및 관리</li>
+                </ul>
+            </div>
+            <div class="detail-section">
+                <h2>포트폴리오</h2>
+                <p>실제 진행한 C랭크 활성화 작업 사례를 확인해보세요.</p>
+                <div class="portfolio-links">
+                    <a href="#" class="portfolio-link" target="_blank">
+                        <span class="portfolio-icon">📁</span>
+                        <span class="portfolio-text">포트폴리오 1</span>
+                        <span class="portfolio-arrow">→</span>
+                    </a>
+                    <a href="#" class="portfolio-link" target="_blank">
+                        <span class="portfolio-icon">📁</span>
+                        <span class="portfolio-text">포트폴리오 2</span>
+                        <span class="portfolio-arrow">→</span>
+                    </a>
+                    <a href="#" class="portfolio-link" target="_blank">
+                        <span class="portfolio-icon">📁</span>
+                        <span class="portfolio-text">포트폴리오 3</span>
+                        <span class="portfolio-arrow">→</span>
+                    </a>
+                </div>
+            </div>
+            <div class="detail-section">
+                <h2>이런 분께 추천합니다</h2>
+                <p>• 카페 검색 노출이 잘 안 되시는 분</p>
+                <p>• 카페 품질 점수를 높이고 싶으신 분</p>
+                <p>• 경쟁 카페보다 상위 노출을 원하시는 분</p>
+                <p>• 장기적인 카페 성장 전략이 필요하신 분</p>
+            </div>
+        </section>
+        <section class="detail-cta">
+            <h3>C랭크 활성화로 검색 노출을 높이세요</h3>
+            <p>전문 컨설턴트가 맞춤형 솔루션을 제안해드립니다</p>
+            <a href="https://open.kakao.com/o/sNLp4CBd" target="_blank" class="cta-button">무료 상담 신청하기</a>
+        </section>
+        <footer class="detail-footer">
+            <p>© 2024 광고스테이션. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Detail Page: 카페 상위노출 -->
+    <div id="page-cafe-exposure" class="page">
+        <section class="detail-hero">
+            <h1>카페 상위노출</h1>
+            <p>지정 키워드 검색 시 네이버 통합검색 1페이지 노출을 목표로 설계된 서비스입니다</p>
+        </section>
+        <section class="detail-content">
+            <div class="back-button" onclick="showPage('main')">← 목록으로 돌아가기</div>
+            <div class="detail-section">
+                <h2>서비스 소개</h2>
+                <p>카페 상위노출 서비스는 원하시는 키워드로 검색했을 때 네이버 통합검색 또는 카페 탭에서 상위에 노출되도록 해드리는 서비스입니다.</p>
+                <p>최적화된 카페와 ID를 활용하여 자연스러운 방식으로 상위 노출을 달성하며, 노출 보장형으로 운영됩니다.</p>
+            </div>
+            <div class="detail-section">
+                <h2>주요 특징</h2>
+                <ul class="feature-list">
+                    <li>원하는 키워드 상위노출 보장</li>
+                    <li>네이버 통합검색 1페이지 목표</li>
+                    <li>자연스러운 노출 방식</li>
+                    <li>키워드별 맞춤 전략 수립</li>
+                    <li>노출 유지 기간 보장</li>
+                </ul>
+            </div>
+            <div class="detail-section">
+                <h2>이런 분께 추천합니다</h2>
+                <p>• 특정 키워드로 검색 노출을 원하시는 분</p>
+                <p>• 경쟁 업체보다 먼저 노출되고 싶으신 분</p>
+                <p>• 확실한 노출 효과를 원하시는 분</p>
+                <p>• 브랜드 인지도를 빠르게 높이고 싶으신 분</p>
+            </div>
+        </section>
+        <section class="detail-cta">
+            <h3>상위노출로 브랜드를 알리세요</h3>
+            <p>전문 컨설턴트가 맞춤형 솔루션을 제안해드립니다</p>
+            <a href="https://open.kakao.com/o/sNLp4CBd" target="_blank" class="cta-button">무료 상담 신청하기</a>
+        </section>
+        <footer class="detail-footer">
+            <p>© 2024 광고스테이션. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Detail Page: 카페 컨설팅 -->
+    <div id="page-cafe-consulting" class="page">
+        <section class="detail-hero">
+            <h1>카페 컨설팅</h1>
+            <p>카페 운영 전반에 대한 전문 컨설팅을 제공하여 체계적인 성장 전략을 수립합니다</p>
+        </section>
+        <section class="detail-content">
+            <div class="back-button" onclick="showPage('main')">← 목록으로 돌아가기</div>
+            <div class="detail-section">
+                <h2>서비스 소개</h2>
+                <p>카페 컨설팅 서비스는 10년 이상의 네이버 카페 운영 노하우를 바탕으로 카페 성장에 필요한 모든 전략을 제공해드립니다.</p>
+                <p>카페 개설부터 운영, 마케팅, 수익화까지 전 과정에 걸쳐 1:1 맞춤형 컨설팅을 진행합니다.</p>
+            </div>
+            <div class="detail-section">
+                <h2>주요 특징</h2>
+                <ul class="feature-list">
+                    <li>1:1 맞춤형 카페 운영 전략 수립</li>
+                    <li>카페 구조 및 메뉴 최적화</li>
+                    <li>콘텐츠 기획 및 운영 방법 교육</li>
+                    <li>회원 관리 및 커뮤니티 활성화 전략</li>
+                    <li>수익화 모델 구축 지원</li>
+                </ul>
+            </div>
+            <div class="detail-section">
+                <h2>이런 분께 추천합니다</h2>
+                <p>• 카페를 처음 시작하시는 분</p>
+                <p>• 카페 운영에 어려움을 겪고 계신 분</p>
+                <p>• 카페를 통한 수익화를 원하시는 분</p>
+                <p>• 전문적인 카페 운영 노하우를 배우고 싶으신 분</p>
+            </div>
+        </section>
+        <section class="detail-cta">
+            <h3>전문가와 함께 카페를 성장시키세요</h3>
+            <p>전문 컨설턴트가 맞춤형 솔루션을 제안해드립니다</p>
+            <a href="https://open.kakao.com/o/sNLp4CBd" target="_blank" class="cta-button">무료 상담 신청하기</a>
+        </section>
+        <footer class="detail-footer">
+            <p>© 2024 광고스테이션. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Page Navigation with History
+        function showPage(pageId, addToHistory = true) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show target page
+            const targetPage = document.getElementById('page-' + pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+                window.scrollTo(0, 0);
+                
+                // Add to browser history
+                if (addToHistory) {
+                    history.pushState({ page: pageId }, '', '#' + pageId);
+                }
+            }
+        }
+
+        // Handle browser back/forward buttons
+        window.addEventListener('popstate', function(event) {
+            if (event.state && event.state.page) {
+                showPage(event.state.page, false);
+            } else {
+                showPage('main', false);
+            }
+        });
+
+        // Handle initial page load with hash
+        window.addEventListener('load', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash && document.getElementById('page-' + hash)) {
+                showPage(hash, false);
+            } else {
+                history.replaceState({ page: 'main' }, '', '#main');
+            }
+        });
+
+        // Scroll to Section
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const isActive = item.classList.contains('active');
+                
+                // Close all items
+                document.querySelectorAll('.faq-item').forEach(faq => {
+                    faq.classList.remove('active');
+                });
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Navbar background change on scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.boxShadow = '0 2px 30px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.05)';
+            }
+        });
+    </script>
+</body>
+</html>
